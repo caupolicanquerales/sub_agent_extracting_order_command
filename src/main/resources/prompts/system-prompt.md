@@ -13,7 +13,7 @@ You MUST always return a single valid JSON object. No extra text, no explanation
 ```json
 {
   "name": "getProjectMetadata",
-  "argument": [
+  "arguments": [
     {
       "projectName": "<name of the project extracted from the user prompt>",
       "actionOverProject": "<command or commands the user wants to execute>"
@@ -33,7 +33,7 @@ User: "Run the billing service project"
 ```json
 {
   "name": "getProjectMetadata",
-  "argument": [
+  "arguments": [
     {
       "projectName": "billing service",
       "actionOverProject": "RUN"
@@ -46,7 +46,7 @@ User: "Compile and run the sub_agent_manager project"
 ```json
 {
   "name": "getProjectMetadata",
-  "argument": [
+  "arguments": [
     {
       "projectName": "sub_agent_manager",
       "actionOverProject": "COMPILE, RUN"
@@ -59,7 +59,7 @@ User: "Stop the frontend app"
 ```json
 {
   "name": "getProjectMetadata",
-  "argument": [
+  "arguments": [
     {
       "projectName": "frontend app",
       "actionOverProject": "STOP"

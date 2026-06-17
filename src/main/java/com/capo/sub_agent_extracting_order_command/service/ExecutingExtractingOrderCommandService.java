@@ -5,6 +5,7 @@ import java.util.concurrent.CompletableFuture;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.SystemMessage;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capo.sub_agent_extracting_order_command.response.DataMessage;
@@ -17,12 +18,15 @@ public class ExecutingExtractingOrderCommandService {
 	
 	private final ChatClient chatClient;
 	private final String systemPrompt;
-	private final ObjectMapper objectMapper = new ObjectMapper();
+	private final ObjectMapper objectMapper;
+	private final static String SHOW_VS_CODE="recursive";
 	
 	public ExecutingExtractingOrderCommandService(@Qualifier("chatClientGeneral") ChatClient chatClient,
-			@Qualifier("systemPrompt") String systemPrompt) {
+			@Qualifier("systemPrompt") String systemPrompt,
+			ObjectMapper objectMapper) {
 		this.chatClient = chatClient;
 		this.systemPrompt = systemPrompt;
+		this.objectMapper = objectMapper;
 	}
 	
 	public CompletableFuture<String> generateExtractingOrderCommandAsync(String prompt) {
@@ -35,6 +39,7 @@ public class ExecutingExtractingOrderCommandService {
 					.content();
 
 			DataMessage dataMessage = new DataMessage();
+			dataMessage.setType(SHOW_VS_CODE);
 			try {
 				String json = content.trim();
 				if (json.startsWith("```")) {
